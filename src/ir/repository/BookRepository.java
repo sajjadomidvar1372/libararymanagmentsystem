@@ -13,7 +13,7 @@ import java.sql.PreparedStatement;
 public class BookRepository {
     private DatabaseConfig databaseConfig = new DatabaseConfig();
 
-    public int createBook(Book book) {
+    public int create(Book book) {
         String insertQuery = "INSERT INTO books(title, author, price, stock) VALUES (?, ?, ?, ?)";
         try (Connection connection = this.databaseConfig.getConnection();
              PreparedStatement ps = connection.prepareStatement(insertQuery)) {
@@ -23,7 +23,7 @@ public class BookRepository {
             ps.setInt(4, book.getStock());
             return ps.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("INSERT FALIED");
+            throw new RuntimeException("INSERT FAILED");
         }
     }
 
@@ -64,7 +64,7 @@ public class BookRepository {
             throw new RuntimeException(e);
         }
     }
-    public int deleteBook(int id ){
+    public int delete(int id ){
         String deleteQuery = "DELETE FROM books WHERE id = ?";
         try(Connection connection = databaseConfig.getConnection();
             PreparedStatement ps = connection.prepareStatement(deleteQuery)){
