@@ -20,7 +20,7 @@ public class MemberRepository {
             return ps.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("INSERT MEMBER ERROR: " + e.getMessage());
+            throw new MemberNotFoundException("INSERT MEMBER ERROR: " + e.getMessage());
         }
     }
 
@@ -39,7 +39,7 @@ public class MemberRepository {
             }
             throw new MemberNotFoundException("MEMBER NOT FOUND");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new MemberNotFoundException("MEMBER NOT FOUND: " + e.getMessage());
         }
     }
     public int deleteMember(int id) {
@@ -49,12 +49,12 @@ public class MemberRepository {
             ps.setInt(1, id);
             int  record = ps.executeUpdate();
             if (record == 0) {
-                throw new MemberNotFoundException("MEMBER NOT FOUND");
+                throw new MemberNotFoundException("MEMBER NOT DELETED");
             }
             return record;
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new MemberNotFoundException("MEMBER NOT DELETED");
         }
     }
 }

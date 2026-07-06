@@ -15,22 +15,22 @@ public class BookRepository {
 
     public int create(Book book) {
         String insertQuery = "INSERT INTO books(title, author, price, stock) VALUES (?, ?, ?, ?)";
-        try (Connection connection = this.databaseConfig.getConnection();
-             PreparedStatement ps = connection.prepareStatement(insertQuery)) {
+        Connection connection = this.databaseConfig.getConnection();
+        try (PreparedStatement ps = connection.prepareStatement(insertQuery)) {
             ps.setString(1, book.getTitle());
             ps.setString(2, book.getAuthor());
             ps.setDouble(3, book.getPrice());
             ps.setInt(4, book.getStock());
             return ps.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("INSERT FAILED" + e.getMessage());
+            throw new BookNotFoundException("INSERT FAILED" + e.getMessage());
         }
     }
 
     public Book findById(int id) {
         String findQuery = "SELECT * FROM books WHERE id = ?";
-        try (Connection connection = this.databaseConfig.getConnection();
-             PreparedStatement ps = connection.prepareStatement(findQuery)) {
+        Connection connection = this.databaseConfig.getConnection();
+        try (PreparedStatement ps = connection.prepareStatement(findQuery)) {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
@@ -45,7 +45,7 @@ public class BookRepository {
             }
             throw new BookNotFoundException(" THIS ID IS NOT VALID AND BOOK NOT FOUND");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new BookNotFoundException(e.getMessage());
         }
     }
 
@@ -61,7 +61,7 @@ public class BookRepository {
             }
             return record;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new BookNotFoundException(e.getMessage());
         }
     }
     public int delete(int id ){
@@ -75,7 +75,7 @@ public class BookRepository {
             }
             return record;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new BookNotFoundException(e.getMessage());
         }
 
     }
