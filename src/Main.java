@@ -1,3 +1,4 @@
+import ir.exception.BookNotFoundException;
 import ir.model.Book;
 import ir.model.Member;
 import ir.repository.BookRepository;
@@ -23,7 +24,7 @@ public class Main {
             System.out.println("4. Update Book Price");
             System.out.println("5. Delete Book");
             System.out.println("6. Delete Member");
-            System.out.println("0. Exit");
+            System.out.println("8. Exit");
             System.out.print("Choose: ");
 
             int choice = scanner.nextInt();
@@ -75,7 +76,12 @@ public class Main {
                     System.out.print("Book ID: ");
                     int findId = scanner.nextInt();
 
-                    System.out.println(bookRepository.findById(findId));
+                    try {
+                        System.out.println(bookRepository.findById(findId));
+                    } catch (BookNotFoundException e) {
+                        System.out.println(e.getMessage());
+                    }
+
                     break;
 
                 case 4:
