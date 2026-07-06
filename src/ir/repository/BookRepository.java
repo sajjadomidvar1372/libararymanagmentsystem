@@ -23,7 +23,7 @@ public class BookRepository {
             ps.setInt(4, book.getStock());
             return ps.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("INSERT FAILED");
+            throw new RuntimeException("INSERT FAILED" + e.getMessage());
         }
     }
 
