@@ -64,5 +64,20 @@ public class BookRepository {
             throw new RuntimeException(e);
         }
     }
+    public int deleteBook(int id ){
+        String deleteQuery = "DELETE FROM books WHERE id = ?";
+        try(Connection connection = databaseConfig.getConnection();
+            PreparedStatement ps = connection.prepareStatement(deleteQuery)){
+            ps.setInt(1, id);
+            int record = ps.executeUpdate();
+            if (record == 0) {
+                throw new BookNotFoundException("THE BOOK NOT FOUND FOR DELETE");
+            }
+            return record;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
 }
