@@ -14,7 +14,7 @@ public class DatabaseConfig {
         try{
             return DriverManager.getConnection(URL, USERNAME , PASSWORD);
         }catch (Exception e){
-            throw new DatabaseConnectionException(" Connection Failed " .concat(e.getMessage()));
+            throw new RuntimeException(" Connection Failed " .concat(e.getMessage()));
         }
     }
 }
