@@ -117,7 +117,7 @@ public class Main {
                     System.out.println("Member Deleted Successfully.");
                     break;
 
-                case 0:
+                case 8:
 
                     System.out.println("Good Bye...");
                     return;
