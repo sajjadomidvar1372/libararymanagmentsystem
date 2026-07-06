@@ -4,6 +4,7 @@ import ir.exception.DatabaseConnectionException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DatabaseConfig {
     private String URL = "jdbc:postgresql://localhost:5432/library_management_system";
@@ -13,8 +14,8 @@ public class DatabaseConfig {
     public Connection getConnection() {
         try{
             return DriverManager.getConnection(URL, USERNAME , PASSWORD);
-        }catch (Exception e){
-            throw new RuntimeException(" Connection Failed " .concat(e.getMessage()));
+        }catch (SQLException e){
+            throw new DatabaseConnectionException(" Connection Failed " .concat(e.getMessage()));
         }
     }
 }
