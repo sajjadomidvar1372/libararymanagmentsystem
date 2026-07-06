@@ -125,6 +125,7 @@ public class Main {
                 default:
 
                     System.out.println("Invalid Choice!");
+                    System.out.println("Invalid Choice!");
             }
         }
     }
