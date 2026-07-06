@@ -1,6 +1,5 @@
 package ir.repository;
 
-import ir.exception.BookNotFoundException;
 import ir.exception.MemberNotFoundException;
 import ir.model.Member;
 import ir.util.DatabaseConfig;
